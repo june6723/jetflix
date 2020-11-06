@@ -35,7 +35,7 @@ const ImageContainer = styled.div`
       opacity: 1;
       transition: opacity 0.1s linear;
     }
-  }stroke-dashoffsetdf
+  }
 `;
 
 const Title = styled.span`
