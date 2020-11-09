@@ -69,7 +69,16 @@ const Overview = styled.p`
   width: 50%;
 `;
 
-const DetailPresenter = ({ result, error, loading }) =>
+const Trailer = styled.iframe`
+  margin-top: 10px;
+  padding: 0;
+  width: 50%;
+  height: 50%;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
+`;
+
+const DetailPresenter = ({ result, videos, error, loading }) =>
   loading ? (
     <>
       <Helmet>
@@ -125,6 +134,9 @@ const DetailPresenter = ({ result, error, loading }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
+          <Trailer
+            src={`https://www.youtube.com/embed/${videos[0].key}`}
+          ></Trailer>
         </Data>
       </Content>
     </Container>
@@ -132,6 +144,7 @@ const DetailPresenter = ({ result, error, loading }) =>
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
+  videos: PropTypes.array,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
 };
