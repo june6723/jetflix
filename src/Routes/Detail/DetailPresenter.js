@@ -70,7 +70,7 @@ const Overview = styled.p`
 `;
 
 const Trailer = styled.iframe`
-  margin-top: 10px;
+  margin: 10px;
   padding: 0;
   width: 50%;
   height: 50%;
@@ -134,9 +134,11 @@ const DetailPresenter = ({ result, videos, error, loading }) =>
             </Item>
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          <Trailer
-            src={`https://www.youtube.com/embed/${videos[0].key}`}
-          ></Trailer>
+          {videos.map((video) => (
+            <Trailer
+              src={`https://www.youtube.com/embed/${video.key}`}
+            ></Trailer>
+          ))}
         </Data>
       </Content>
     </Container>
