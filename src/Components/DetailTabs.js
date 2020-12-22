@@ -21,6 +21,9 @@ const TabButton = styled.button`
 `;
 const ContentContainer = styled.div`
   border: 1px solid orange;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  grid-gap: 25px;
   height: 100%;
 `;
 
@@ -51,7 +54,7 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
       <TitleList>
         {content &&
           content.map((item, index) => (
-            <TabTitle>
+            <TabTitle key={index}>
               <TabButton onClick={() => setCurrent(index)}>
                 {item.tabTitle}
               </TabButton>
@@ -59,10 +62,26 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
           ))}
       </TitleList>
       <ContentContainer>
+        {content[current] && content[current].tabTitle === "Videos" && (
+          <VideosTab videos={content[current].tabContent} />
+        )}
         {/* {content[current] &&
           content[current].tabContent.map((item) => <span>{item.id}</span>)} */}
       </ContentContainer>
     </Container>
+  );
+};
+const VideoTemplate = styled.div``;
+const VideosTab = ({ videos }) => {
+  return (
+    <>
+      {videos &&
+        videos.map((video) => (
+          <VideoTemplate key={video.id}>
+            <iframe src={`https://www.youtube.com/embed/${video.key}`}></iframe>
+          </VideoTemplate>
+        ))}
+    </>
   );
 };
 
