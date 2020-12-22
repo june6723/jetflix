@@ -29,7 +29,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://june6723.github.io/jetflix",
+  "homepage": "https://goofy-bose-b13677.netlify.app",
   "browserslist": {
     "production": [
       ">0.2%",

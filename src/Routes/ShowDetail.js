@@ -4,12 +4,14 @@ import Loader from "Components/Loader";
 import Message from "Components/Message";
 import ImdbLogo from "../Components/ImdbLogo";
 import { Helmet } from "react-helmet-async";
+import DetailTabs from "../Components/DetailTabs";
 
 const Container = styled.div`
   height: calc(100vh - 50px);
   width: 100%;
   position: relative;
   padding: 50px;
+  /* padding-bottom: 0; */
 `;
 
 const Backdrop = styled.div`
@@ -47,6 +49,7 @@ const Cover = styled.div`
 const Data = styled.div`
   width: 70%;
   margin-left: 10px;
+  height: 100vh;
 `;
 
 const Title = styled.h3`
@@ -71,21 +74,15 @@ const Overview = styled.p`
   line-height: 1.5;
   width: 50%;
 `;
-
-const Trailer = styled.iframe`
-  margin: 10px;
-  padding: 0;
-  width: 50%;
-  height: 50%;
-  border-radius: 5px;
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.3);
-`;
+const titles = ["Videos", "Cast"];
+const v = [1, 2, 3, 4];
+const c = ["a", "b", "c", "d"];
 
 const ShowDetail = ({ result, videos, error, loading }) => {
   return loading ? (
     <>
       <Helmet>
-        <tityle>Loading | Jetflix</tityle>
+        <title>Loading | Jetflix</title>
       </Helmet>
       <Loader />
     </>
@@ -145,12 +142,7 @@ const ShowDetail = ({ result, videos, error, loading }) => {
             )}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          {videos.map((video, i) => (
-            <Trailer
-              key={i}
-              src={`https://www.youtube.com/embed/${video.key}`}
-            ></Trailer>
-          ))}
+          <DetailTabs tabTitleList={titles} videos={videos} c={c} />
         </Data>
       </Content>
     </Container>
