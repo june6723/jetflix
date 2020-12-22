@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import Loader from "Components/Loader";
 import Section from "Components/Section";
 import Message from "Components/Message";

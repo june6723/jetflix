@@ -1,12 +1,15 @@
 import React from "react";
 import Router from "Components/Router";
 import GlobalStyles from "Components/GlobalStyles";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   return (
     <>
-      <Router />
-      <GlobalStyles />
+      <HelmetProvider>
+        <Router />
+        <GlobalStyles />
+      </HelmetProvider>
     </>
   );
 }
