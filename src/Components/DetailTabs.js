@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import CastTabLink from "./CastTabLink";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -104,42 +105,11 @@ const CastTemplate = styled.div`
   grid-gap: 25px;
   justify-content: center;
 `;
-const CastContent = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-const CastInfoLink = styled.a``;
-const CastProfileImg = styled.img`
-  width: 180px;
-`;
-const CastName = styled.span`
-  font-size: 14px;
-  margin-top: 5px;
-`;
-const CastNameInAct = styled.span`
-  margin-top: 5px;
-  color: #bdc3c7;
-`;
+
 const CastTab = ({ casts }) => {
-  console.log(casts);
   return (
     <CastTemplate>
-      {casts &&
-        casts.map((cast) => (
-          <CastContent key={cast.id}>
-            <CastInfoLink>
-              <CastProfileImg
-                src={
-                  cast.profile_path
-                    ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
-                    : require("../Assets/noPosterSmall.png")
-                }
-              />
-            </CastInfoLink>
-            <CastName>{cast.name}</CastName>
-            <CastNameInAct>{cast.character}</CastNameInAct>
-          </CastContent>
-        ))}
+      {casts && casts.map((cast) => <CastTabLink key={cast.id} cast={cast} />)}
     </CastTemplate>
   );
 };

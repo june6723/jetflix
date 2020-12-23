@@ -43,3 +43,6 @@ export const tvApi = {
       },
     }),
 };
+export const personApi = {
+  personData: (id) => api.get(`person/${id}`),
+};
