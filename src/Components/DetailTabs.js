@@ -6,23 +6,26 @@ const Container = styled.div`
   height: 55%;
 `;
 const TitleList = styled.ul`
-  border: 1px solid blue;
   display: flex;
   align-items: center;
 `;
 const TabTitle = styled.li`
-  margin-right: 10px;
   height: 50px;
   width: 100px;
 `;
 const TabButton = styled.button`
   height: 100%;
   width: 100%;
+  background: ${(props) => (props.current ? "#3498db" : "rgba(20, 20, 20, 1)")};
+  color: #ecf0f1;
+  border: none;
+  cursor: ${(props) => (props.current ? "default" : "pointer")};
 `;
 const ContentContainer = styled.div`
-  border: 1px solid orange;
   overflow: auto;
   height: 100%;
+  background-color: rgba(20, 20, 20, 1);
+  padding: 10px 0;
 `;
 
 const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
@@ -52,7 +55,10 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
         {content &&
           content.map((item, index) => (
             <TabTitle key={index}>
-              <TabButton onClick={() => setCurrent(index)}>
+              <TabButton
+                current={index === current ? true : false}
+                onClick={() => setCurrent(index)}
+              >
                 {item.tabTitle}
               </TabButton>
             </TabTitle>
@@ -94,7 +100,7 @@ const VideosTab = ({ videos }) => {
 };
 const CastTemplate = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 150px);
+  grid-template-columns: repeat(auto-fill, 180px);
   grid-gap: 25px;
   justify-content: center;
 `;
@@ -102,11 +108,18 @@ const CastContent = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const CastInfoLink = styled.a``;
 const CastProfileImg = styled.img`
-  width: 150px;
+  width: 180px;
 `;
-const CastName = styled.span``;
-const CastNameInAct = styled.span``;
+const CastName = styled.span`
+  font-size: 14px;
+  margin-top: 5px;
+`;
+const CastNameInAct = styled.span`
+  margin-top: 5px;
+  color: #bdc3c7;
+`;
 const CastTab = ({ casts }) => {
   console.log(casts);
   return (
@@ -114,13 +127,15 @@ const CastTab = ({ casts }) => {
       {casts &&
         casts.map((cast) => (
           <CastContent key={cast.id}>
-            <CastProfileImg
-              src={
-                cast.profile_path
-                  ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
-                  : require("../Assets/noPosterSmall.png")
-              }
-            />
+            <CastInfoLink>
+              <CastProfileImg
+                src={
+                  cast.profile_path
+                    ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
+                    : require("../Assets/noPosterSmall.png")
+                }
+              />
+            </CastInfoLink>
             <CastName>{cast.name}</CastName>
             <CastNameInAct>{cast.character}</CastNameInAct>
           </CastContent>
