@@ -21,9 +21,7 @@ const TabButton = styled.button`
 `;
 const ContentContainer = styled.div`
   border: 1px solid orange;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 320px);
-  grid-gap: 25px;
+  overflow: auto;
   height: 100%;
 `;
 
@@ -47,7 +45,6 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
   useEffect(() => {
     FillContent();
   }, []);
-  console.log(content);
 
   return (
     <Container>
@@ -65,23 +62,70 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
         {content[current] && content[current].tabTitle === "Videos" && (
           <VideosTab videos={content[current].tabContent} />
         )}
-        {/* {content[current] &&
-          content[current].tabContent.map((item) => <span>{item.id}</span>)} */}
+        {content[current] && content[current].tabTitle === "Cast" && (
+          <CastTab casts={content[current].tabContent} />
+        )}
       </ContentContainer>
     </Container>
   );
 };
-const VideoTemplate = styled.div``;
+const VideoTemplate = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 420px);
+  grid-gap: 25px;
+  justify-content: center;
+`;
+const YTVideo = styled.iframe`
+  width: 420px;
+  height: 240px;
+`;
 const VideosTab = ({ videos }) => {
   return (
-    <>
+    <VideoTemplate>
       {videos &&
         videos.map((video) => (
-          <VideoTemplate key={video.id}>
-            <iframe src={`https://www.youtube.com/embed/${video.key}`}></iframe>
-          </VideoTemplate>
+          <YTVideo
+            key={video.id}
+            src={`https://www.youtube.com/embed/${video.key}`}
+          ></YTVideo>
         ))}
-    </>
+    </VideoTemplate>
+  );
+};
+const CastTemplate = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  grid-gap: 25px;
+  justify-content: center;
+`;
+const CastContent = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CastProfileImg = styled.img`
+  width: 150px;
+`;
+const CastName = styled.span``;
+const CastNameInAct = styled.span``;
+const CastTab = ({ casts }) => {
+  console.log(casts);
+  return (
+    <CastTemplate>
+      {casts &&
+        casts.map((cast) => (
+          <CastContent key={cast.id}>
+            <CastProfileImg
+              src={
+                cast.profile_path
+                  ? `https://image.tmdb.org/t/p/w200${cast.profile_path}`
+                  : require("../Assets/noPosterSmall.png")
+              }
+            />
+            <CastName>{cast.name}</CastName>
+            <CastNameInAct>{cast.character}</CastNameInAct>
+          </CastContent>
+        ))}
+    </CastTemplate>
   );
 };
 

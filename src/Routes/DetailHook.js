@@ -11,6 +11,7 @@ const DetailHook = (props) => {
   // init Hook state
   const [result, setResult] = useState(null);
   const [videos, setVideos] = useState(null);
+  const [casts, setCasts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,25 +28,30 @@ const DetailHook = (props) => {
     }
     let resultData = null;
     let resultVideos = null;
+    let resultCasts = null;
     try {
       if (isMovie) {
         ({
           data: resultData,
           data: {
             videos: { results: resultVideos },
+            credits: { cast: resultCasts },
           },
         } = await moviesApi.movieDetail(parsedId));
         setResult(resultData);
         setVideos(resultVideos);
+        setCasts(resultCasts);
       } else {
         ({
           data: resultData,
           data: {
             videos: { results: resultVideos },
+            credits: { cast: resultCasts },
           },
         } = await tvApi.tvDetail(parsedId));
         setResult(resultData);
         setVideos(resultVideos);
+        setCasts(resultCasts);
       }
     } catch {
       setError("Can't find anything.");
@@ -61,6 +67,7 @@ const DetailHook = (props) => {
     <ShowDetail
       result={result}
       videos={videos}
+      casts={casts}
       error={error}
       loading={loading}
     ></ShowDetail>

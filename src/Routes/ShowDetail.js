@@ -78,7 +78,7 @@ const titles = ["Videos", "Cast"];
 const v = [1, 2, 3, 4];
 const c = ["a", "b", "c", "d"];
 
-const ShowDetail = ({ result, videos, error, loading }) => {
+const ShowDetail = ({ result, videos, casts, error, loading }) => {
   return loading ? (
     <>
       <Helmet>
@@ -142,7 +142,7 @@ const ShowDetail = ({ result, videos, error, loading }) => {
             )}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          <DetailTabs tabTitleList={titles} videos={videos} c={c} />
+          <DetailTabs tabTitleList={titles} videos={videos} casts={casts} />
         </Data>
       </Content>
     </Container>
