@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import CastTabLink from "./CastTabLink";
+import TVSeasonTab from "./TVSeasonTab";
 
 const Container = styled.div`
   margin-top: 20px;
@@ -34,16 +35,15 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
   const [content, setContent] = useState([]);
 
   const FillContent = () => {
-    let count = 0;
     let mergedContents = [];
-    for (const data in tabContentDatas) {
+    tabTitleList.forEach((title) => {
       const newContent = [
-        { tabTitle: tabTitleList[count], tabContent: tabContentDatas[data] },
+        { tabTitle: title, tabContent: tabContentDatas[title] },
       ];
       mergedContents = mergedContents.concat(newContent);
-      count++;
-    }
+    });
     setContent(mergedContents);
+    console.log(mergedContents);
   };
 
   useEffect(() => {
@@ -71,6 +71,9 @@ const DetailTabs = ({ tabTitleList, ...tabContentDatas }) => {
         )}
         {content[current] && content[current].tabTitle === "Cast" && (
           <CastTab casts={content[current].tabContent} />
+        )}
+        {content[current] && content[current].tabTitle === "Season" && (
+          <TVSeasonTab seasons={content[current].tabContent} />
         )}
       </ContentContainer>
     </Container>

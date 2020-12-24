@@ -75,10 +75,9 @@ const Overview = styled.p`
   width: 50%;
 `;
 const titles = ["Videos", "Cast"];
-const v = [1, 2, 3, 4];
-const c = ["a", "b", "c", "d"];
+const tvTabTitle = ["Videos", "Cast", "Season"];
 
-const ShowDetail = ({ result, videos, casts, error, loading }) => {
+const ShowDetail = ({ isMovie, result, videos, casts, error, loading }) => {
   return loading ? (
     <>
       <Helmet>
@@ -142,7 +141,12 @@ const ShowDetail = ({ result, videos, casts, error, loading }) => {
             )}
           </ItemContainer>
           <Overview>{result.overview}</Overview>
-          <DetailTabs tabTitleList={titles} videos={videos} casts={casts} />
+          <DetailTabs
+            tabTitleList={isMovie ? titles : tvTabTitle}
+            Videos={videos}
+            Cast={casts}
+            Season={result.seasons}
+          />
         </Data>
       </Content>
     </Container>

@@ -65,6 +65,7 @@ const DetailHook = (props) => {
 
   return (
     <ShowDetail
+      isMovie={isMovie}
       result={result}
       videos={videos}
       casts={casts}
