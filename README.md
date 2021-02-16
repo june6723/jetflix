@@ -1,6 +1,8 @@
 # Jetflix
 
 Learning React and ES6 by building a movie discover app.
+Challenge success on NomadCoders!
+https://goofy-bose-b13677.netlify.app/
 
 ## Screens
 
